@@ -11,7 +11,7 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 object AppExceptionMapper {
-    fun mapException(exc: Exception): CustomAppException {
+    fun mapException(exc: Throwable): CustomAppException {
         return when (exc) {
             is HttpException -> {
                 when {

@@ -1,5 +1,6 @@
 package com.example.yassirmovieapp.presentation.movies_list
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -19,19 +20,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.yassirmovieapp.R
 import com.example.yassirmovieapp.domain.model.Movie
-import com.example.yassirmovieapp.presentation.ui.theme.YassirMovieAppTheme
 
 @Composable
 fun MovieItem(
     movie: Movie,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (Int) -> Unit
 ) {
-    Card(modifier = modifier.fillMaxWidth()) {
+    Card(modifier = modifier
+        .fillMaxWidth()
+        .clickable {
+            onClick(movie.id)
+        }) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -39,7 +43,7 @@ fun MovieItem(
                 .padding(16.dp)
         ) {
             AsyncImage(
-                model = "https://image.tmdb.org/t/p/w500/${movie.image}",
+                model = "https://image.tmdb.org/t/p/w500${movie.image}",
                 contentDescription = "Movie Image",
                 modifier = Modifier
                     .weight(1f)
@@ -91,6 +95,7 @@ fun MovieItem(
     }
 }
 
+/*
 @Preview
 @Composable
 fun MovieItemPreview() {
@@ -99,11 +104,13 @@ fun MovieItemPreview() {
             movie = Movie(
                 id = 1,
                 title = "Title",
-                image = "6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
+                image = "/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
                 releaseDate = "2021-09-30",
-                voteRating = 7.5
+                voteRating = 7.5,
+                overview = "Overview",
+                status = "Released"
             ),
             modifier = Modifier.fillMaxWidth()
         )
     }
-}
+}*/

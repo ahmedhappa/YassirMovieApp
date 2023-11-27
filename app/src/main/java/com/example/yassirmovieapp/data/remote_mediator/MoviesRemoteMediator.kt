@@ -13,7 +13,7 @@ import com.example.yassirmovieapp.data.remote.api.MovieAppApi
 import com.example.yassirmovieapp.general.AppExceptionMapper
 
 @OptIn(ExperimentalPagingApi::class)
-class MovieRemoteMediator(
+class MoviesRemoteMediator(
     private val movieAppDatabase: MovieAppDatabase,
     private val movieAppApi: MovieAppApi
 ) : RemoteMediator<Int, MovieEntity>() {

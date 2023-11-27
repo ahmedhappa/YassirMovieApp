@@ -3,10 +3,12 @@ package com.example.yassirmovieapp.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.yassirmovieapp.presentation.movie_details.MovieDetailsScreen
 import com.example.yassirmovieapp.presentation.movies_list.MoviesScreen
 import com.example.yassirmovieapp.presentation.ui.theme.YassirMovieAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,12 +19,27 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             YassirMovieAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                val rememberedNavController = rememberNavController()
+                NavHost(
+                    navController = rememberedNavController,
+                    startDestination = AppRoutes.MoviesList.route
                 ) {
-                    MoviesScreen()
+                    composable(route = AppRoutes.MoviesList.route) {
+                        MoviesScreen(navController = rememberedNavController)
+                    }
+
+                    composable(
+                        route = "${AppRoutes.MovieDetails.route}/{movieId}",
+                        arguments = listOf(
+                            navArgument("movieId") {
+                                type = NavType.IntType
+                                nullable = false
+                                defaultValue = -1
+                            }
+                        )
+                    ) { navBackStackEntry ->
+                        MovieDetailsScreen(movieId = navBackStackEntry.arguments?.getInt("movieId") ?: -1)
+                    }
                 }
             }
         }

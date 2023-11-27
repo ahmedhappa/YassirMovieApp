@@ -25,7 +25,7 @@ class MoviesViewModel @Inject constructor(
             }
 
             is MoviesEvent.SetError -> _state.update {
-                it.copy(errorEvent = event.error.uiText)
+                it.copy(error = event.error.uiText)
             }
         }
     }

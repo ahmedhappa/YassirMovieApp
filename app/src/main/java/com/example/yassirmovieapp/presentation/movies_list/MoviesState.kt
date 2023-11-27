@@ -4,5 +4,5 @@ import com.example.yassirmovieapp.general.UiText
 
 data class MoviesState(
     val isLoading: Boolean = false,
-    val errorEvent: UiText? = null
+    val error: UiText? = null
 )
