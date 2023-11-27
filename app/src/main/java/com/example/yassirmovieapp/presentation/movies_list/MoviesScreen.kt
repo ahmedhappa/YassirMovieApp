@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -92,11 +93,11 @@ fun MoviesScreen(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Image(painter = painterResource(id = R.drawable.img_empty_data), contentDescription = "Empty Data")
+                        Image(painter = painterResource(id = R.drawable.img_empty_data), contentDescription = stringResource(R.string.empty_data))
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text(text = "No results to show", style = MaterialTheme.typography.titleLarge)
+                        Text(text = stringResource(R.string.no_results_to_show), style = MaterialTheme.typography.titleLarge)
                         Spacer(modifier = Modifier.height(8.dp))
-                        Text(text = "Please refresh or try again later", style = MaterialTheme.typography.bodyMedium)
+                        Text(text = stringResource(R.string.please_refresh_or_try_again_later), style = MaterialTheme.typography.bodyMedium)
                         Spacer(modifier = Modifier.height(8.dp))
                         Button(onClick = {
                             movies.refresh()

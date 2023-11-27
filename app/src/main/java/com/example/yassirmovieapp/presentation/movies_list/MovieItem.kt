@@ -18,12 +18,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.yassirmovieapp.R
 import com.example.yassirmovieapp.domain.model.Movie
+import com.example.yassirmovieapp.presentation.theme.SemiYellow
 
 @Composable
 fun MovieItem(
@@ -43,8 +44,8 @@ fun MovieItem(
                 .padding(16.dp)
         ) {
             AsyncImage(
-                model = "https://image.tmdb.org/t/p/w500${movie.image}",
-                contentDescription = "Movie Image",
+                model = movie.fullImageUrl,
+                contentDescription = stringResource(id = R.string.movie_image),
                 modifier = Modifier
                     .weight(1f)
                     .height(100.dp)
@@ -67,7 +68,7 @@ fun MovieItem(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Release Date: ${movie.releaseDate ?: "N/A"}",
+                    text = stringResource(R.string.release_date, movie.releaseDate ?: stringResource(R.string.n_a)),
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -80,8 +81,8 @@ fun MovieItem(
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_star_yellow),
-                        contentDescription = "Rating",
-                        tint = Color(android.graphics.Color.parseColor("#FFD700"))
+                        contentDescription = stringResource(id = R.string.rating),
+                        tint = SemiYellow
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
@@ -94,23 +95,3 @@ fun MovieItem(
         }
     }
 }
-
-/*
-@Preview
-@Composable
-fun MovieItemPreview() {
-    YassirMovieAppTheme {
-        MovieItem(
-            movie = Movie(
-                id = 1,
-                title = "Title",
-                image = "/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg",
-                releaseDate = "2021-09-30",
-                voteRating = 7.5,
-                overview = "Overview",
-                status = "Released"
-            ),
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
-}*/

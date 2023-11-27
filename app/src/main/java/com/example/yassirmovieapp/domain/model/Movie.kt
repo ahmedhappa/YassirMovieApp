@@ -8,4 +8,7 @@ data class Movie(
     val voteRating: Double,
     val status: String?,
     val overview: String?,
-)
+){
+    val fullImageUrl: String
+        get() = "https://image.tmdb.org/t/p/w500$image"
+}

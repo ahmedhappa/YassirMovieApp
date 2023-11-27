@@ -6,4 +6,13 @@
     <string name="error_request_timeout">Request Timeout</string>
     <string name="error_something_went_wrong_please_try_again_later">Something Went wrong please try again later</string>
     <string name="error_unauthorized_access">Unauthorized Access</string>
+    <string name="status">Status: %1$s</string>
+    <string name="release_date">Release Date: %1$s</string>
+    <string name="movie_image">Movie Image</string>
+    <string name="rating">Rating</string>
+    <string name="n_a">N/A</string>
+    <string name="overview">Overview</string>
+    <string name="no_results_to_show">No results to show</string>
+    <string name="please_refresh_or_try_again_later">Please refresh or try again later</string>
+    <string name="empty_data">Empty Data</string>
 </resources>

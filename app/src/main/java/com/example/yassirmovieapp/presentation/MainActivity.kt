@@ -10,7 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.yassirmovieapp.presentation.movie_details.MovieDetailsScreen
 import com.example.yassirmovieapp.presentation.movies_list.MoviesScreen
-import com.example.yassirmovieapp.presentation.ui.theme.YassirMovieAppTheme
+import com.example.yassirmovieapp.presentation.theme.YassirMovieAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

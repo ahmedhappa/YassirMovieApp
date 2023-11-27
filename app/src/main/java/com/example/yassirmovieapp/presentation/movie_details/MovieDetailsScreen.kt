@@ -22,14 +22,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.yassirmovieapp.R
+import com.example.yassirmovieapp.presentation.theme.SemiYellow
 
 @Composable
 fun MovieDetailsScreen(movieId: Int) {
@@ -65,21 +66,21 @@ fun MovieDetailsScreen(movieId: Int) {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "Status: ${it.status ?: "N/A"}",
+                        text = stringResource(R.string.status, it.status ?: stringResource(R.string.n_a)),
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = "Release Date: ${it.releaseDate ?: "N/A"}",
+                        text = stringResource(R.string.release_date, it.releaseDate ?: stringResource(R.string.n_a)),
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.fillMaxWidth()
                     )
 
                     Spacer(modifier = Modifier.height(32.dp))
                     AsyncImage(
-                        model = "https://image.tmdb.org/t/p/w500${it.image}",
-                        contentDescription = "Movie Image",
+                        model = it.fullImageUrl,
+                        contentDescription = stringResource(R.string.movie_image),
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(200.dp)
@@ -94,7 +95,7 @@ fun MovieDetailsScreen(movieId: Int) {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Overview",
+                            text = stringResource(R.string.overview),
                             style = MaterialTheme.typography.titleMedium
                         )
 
@@ -103,8 +104,8 @@ fun MovieDetailsScreen(movieId: Int) {
                         ) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_star_yellow),
-                                contentDescription = "Rating",
-                                tint = Color(android.graphics.Color.parseColor("#FFD700"))
+                                contentDescription = stringResource(R.string.rating),
+                                tint = SemiYellow
                             )
                             Spacer(modifier = Modifier.width(4.dp))
                             Text(
@@ -116,7 +117,7 @@ fun MovieDetailsScreen(movieId: Int) {
 
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = it.overview ?: "N/A",
+                        text = it.overview ?: stringResource(R.string.n_a),
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.fillMaxWidth()
                     )
