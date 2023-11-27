@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">YassirMovieApp</string>
+    <string name="error_internal_server_error">Internal server error</string>
+    <string name="error_something_went_wrong_we_are_trying_to_fix_it">Something Went wrong , We are trying to fix it as fast as possible</string>
+    <string name="error_enable_mobile_data_services">Please enable mobile data services or connect to Wi-Fi network</string>
+    <string name="error_request_timeout">Request Timeout</string>
+    <string name="error_something_went_wrong_please_try_again_later">Something Went wrong please try again later</string>
+    <string name="error_unauthorized_access">Unauthorized Access</string>
 </resources>

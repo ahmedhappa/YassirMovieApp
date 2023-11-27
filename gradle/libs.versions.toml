@@ -1,0 +1,3 @@
+[versions]
+hilt = "2.48.1"
+navigation = "2.7.5"
