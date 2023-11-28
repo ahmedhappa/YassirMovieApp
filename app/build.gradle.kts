@@ -44,7 +44,17 @@ android {
         }
 
         release {
-            isMinifyEnabled = false
+            isDebuggable = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+            buildConfigField(
+                "String",
+                "API_KEY",
+                "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwY2ViNWJkNTFiZDgwN2YyYzJiZWJhYzRiYTE1YjU2MyIsInN1YiI6IjY1NjM0NGY0NzA2ZTU2MDBhY2YwYWQ1NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.y4m26jpBLOcw6ZqDe6wD36nND_s3sWmktMwaUoVWQH0\""
+            )
+
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -59,7 +69,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.4"
     }
     packaging {
         resources {

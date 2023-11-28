@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -32,6 +33,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.yassirmovieapp.R
 import com.example.yassirmovieapp.general.CustomAppException
 import com.example.yassirmovieapp.presentation.AppRoutes
+import timber.log.Timber
 
 @Composable
 fun MoviesScreen(
@@ -40,47 +42,48 @@ fun MoviesScreen(
     val context = LocalContext.current
     val viewModel: MoviesViewModel = hiltViewModel()
     val movies = viewModel.moviesPagingFlow.collectAsLazyPagingItems()
-    val state = viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(key1 = movies.loadState) {
+        when (movies.loadState.refresh) {
+            is LoadState.Loading -> viewModel.onEvent(MoviesEvent.ChangeLoading(true))
+            is LoadState.NotLoading -> viewModel.onEvent(MoviesEvent.ChangeLoading(false))
+            else -> {
+                val errorState = when {
+                    movies.loadState.refresh is LoadState.Error -> movies.loadState.refresh as LoadState.Error
+                    movies.loadState.append is LoadState.Error -> movies.loadState.append as LoadState.Error
+                    movies.loadState.prepend is LoadState.Error -> movies.loadState.prepend as LoadState.Error
+                    else -> null
+                }
+                errorState?.let {
+                    viewModel.onEvent(MoviesEvent.SetError(it.error as CustomAppException))
+                    viewModel.onEvent(MoviesEvent.ChangeLoading(false))
+                }
+            }
+        }
+    }
+
+    LaunchedEffect(key1 = state.error) {
+        state.error?.let {
+            Toast.makeText(
+                context,
+                it.asString(context),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    Timber.d("is Loading ${state.isLoading}, item count ${movies.itemCount}")
 
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        LaunchedEffect(key1 = movies.loadState) {
-            when (movies.loadState.refresh) {
-                is LoadState.Loading -> viewModel.onEvent(MoviesEvent.ChangeLoading(true))
-                is LoadState.NotLoading -> viewModel.onEvent(MoviesEvent.ChangeLoading(false))
-                else -> {
-                    val errorState = when {
-                        movies.loadState.refresh is LoadState.Error -> movies.loadState.refresh as LoadState.Error
-                        movies.loadState.append is LoadState.Error -> movies.loadState.append as LoadState.Error
-                        movies.loadState.prepend is LoadState.Error -> movies.loadState.prepend as LoadState.Error
-                        else -> null
-                    }
-                    errorState?.let {
-                        viewModel.onEvent(MoviesEvent.SetError(it.error as CustomAppException))
-                        viewModel.onEvent(MoviesEvent.ChangeLoading(false))
-                    }
-                }
-            }
-        }
-
-        LaunchedEffect(key1 = state.value.error) {
-            state.value.error?.let {
-                Toast.makeText(
-                    context,
-                    it.asString(context),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
-
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            if (state.value.isLoading) {
+            if (state.isLoading) {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center)
                 )

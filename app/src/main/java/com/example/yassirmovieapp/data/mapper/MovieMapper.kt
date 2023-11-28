@@ -5,6 +5,7 @@ import com.example.yassirmovieapp.data.remote.dto.MovieResponseDto
 import com.example.yassirmovieapp.domain.model.Movie
 
 fun MovieResponseDto.toMovieEntity() = MovieEntity(
+    databaseKey = id.toString(),
     id = id,
     image = posterPath,
     title = title,
