@@ -86,7 +86,7 @@ fun MovieItem(
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "${movie.voteRating}",
+                        text = movie.formattedVoteRatting,
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.fillMaxWidth()
                     )

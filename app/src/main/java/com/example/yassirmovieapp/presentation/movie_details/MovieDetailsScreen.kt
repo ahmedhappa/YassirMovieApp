@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -37,6 +39,7 @@ fun MovieDetailsScreen(movieId: Int) {
     val context = LocalContext.current
     val viewModel: MovieDetailsViewModel = hiltViewModel()
     val state = viewModel.state.collectAsState()
+    val scrollState = rememberScrollState()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -46,6 +49,7 @@ fun MovieDetailsScreen(movieId: Int) {
             Modifier
                 .fillMaxSize()
                 .padding(16.dp)
+                .verticalScroll(scrollState)
         ) {
             LaunchedEffect(key1 = true) {
                 viewModel.onEvent(MovieDetailsEvent.GetMovieDetails(movieId))
@@ -79,7 +83,7 @@ fun MovieDetailsScreen(movieId: Int) {
 
                     Spacer(modifier = Modifier.height(32.dp))
                     AsyncImage(
-                        model = it.fullImageUrl,
+                        model = it.backgroundImageFullUrl,
                         contentDescription = stringResource(R.string.movie_image),
                         modifier = Modifier
                             .fillMaxWidth()
@@ -109,7 +113,7 @@ fun MovieDetailsScreen(movieId: Int) {
                             )
                             Spacer(modifier = Modifier.width(4.dp))
                             Text(
-                                text = "${it.voteRating}",
+                                text = it.formattedVoteRatting,
                                 style = MaterialTheme.typography.labelMedium
                             )
                         }

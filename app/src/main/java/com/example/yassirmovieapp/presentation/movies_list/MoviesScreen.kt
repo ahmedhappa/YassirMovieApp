@@ -33,7 +33,6 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.yassirmovieapp.R
 import com.example.yassirmovieapp.general.CustomAppException
 import com.example.yassirmovieapp.presentation.AppRoutes
-import timber.log.Timber
 
 @Composable
 fun MoviesScreen(
@@ -72,8 +71,6 @@ fun MoviesScreen(
             ).show()
         }
     }
-
-    Timber.d("is Loading ${state.isLoading}, item count ${movies.itemCount}")
 
     Surface(
         modifier = Modifier.fillMaxSize(),

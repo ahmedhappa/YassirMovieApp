@@ -9,6 +9,7 @@ data class MovieEntity(
     val databaseKey: String,
     val id: Int,
     val image: String?,
+    val backgroundImage:String?,
     val title: String,
     val releaseDate: String?,
     val voteRating: Double,
