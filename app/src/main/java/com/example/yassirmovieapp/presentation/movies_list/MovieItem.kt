@@ -1,6 +1,5 @@
 package com.example.yassirmovieapp.presentation.movies_list
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -18,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -29,14 +29,12 @@ import com.example.yassirmovieapp.presentation.theme.SemiYellow
 @Composable
 fun MovieItem(
     movie: Movie,
-    modifier: Modifier = Modifier,
-    onClick: (Int) -> Unit
+    modifier: Modifier = Modifier
 ) {
-    Card(modifier = modifier
-        .fillMaxWidth()
-        .clickable {
-            onClick(movie.id)
-        }) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -48,7 +46,9 @@ fun MovieItem(
                 contentDescription = stringResource(id = R.string.movie_image),
                 modifier = Modifier
                     .weight(1f)
-                    .height(100.dp)
+                    .height(120.dp),
+                contentScale = ContentScale.Crop,
+                error = painterResource(id = R.drawable.img_movie_placeholder)
             )
 
             Spacer(modifier = Modifier.width(16.dp))

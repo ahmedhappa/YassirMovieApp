@@ -92,6 +92,7 @@ dependencies {
 
     // Coil Compose
     implementation(libs.coil.compose)
+    implementation(libs.swiprefresh.compose)
 
     // lifecycle
     implementation(libs.lifecycle.runtime.ktx)
